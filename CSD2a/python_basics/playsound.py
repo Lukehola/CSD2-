@@ -16,7 +16,7 @@ audio = note * (2**15 - 1) / np.max(np.abs(note))
 
 audio = audio.astype(np.int16)
 
-for i in (1 + range(number_of_times_played)): 
+for i in (range(number_of_times_played)): 
     play_obj = sa.play_buffer(audio, 1, 2, fs)
     play_obj.wait_done()
     print(i)
