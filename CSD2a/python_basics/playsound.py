@@ -13,6 +13,11 @@ number_of_times_played = int(input("How many times do you want it to be played?"
     ##play_obj = sa.play_buffer(audio, 1, 2, fs)
     ##play_obj.wait_done()
 
+##zou leuk zijn als de f langzaam omhoog gaat 
+
+##for i in range(200):
+    ##frequency == +1 
+
 note = np.sin(frequency*t*2*np.pi)
 
 audio = note * (2**15 - 1) / np.max(np.abs(note)) 
