@@ -5,6 +5,11 @@ import sys
 import array as array_module 
 from random import random
 
+text_input_list = open("/Users/521459/Desktop/CSD2-/CSD2a/python_basics/console_input.txt", "r")
+
+input_list = text_input_list.read()
+print(input_list)
+
 wave_obj = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/python_basics/SFX_schaak.wav")
 wave_obj_2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/python_basics/enpassant.wav")
 
@@ -12,7 +17,11 @@ wave_obj_2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/pyt
 
 true_time_tobeadded = 0 
 
-input_list = [4, 1, 0.5, 1.5, 0.5, 120]
+##list of possible input 
+
+input_list = [4, 1, 0.5, 1.5, 0.5, 130]
+print(input_list)
+
 bpm = input_list[-1]
 lines_amount = input_list[0]
 
