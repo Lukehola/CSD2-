@@ -5,13 +5,13 @@ import sys
 import array as array_module 
 from random import random
 
-text_input_list = open("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/console_input_ritmische_player.txt", "r")
+text_input_list = open("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.console_input_ritmische_player.txt", "r")
 
 input_list = text_input_list.read()
 print(input_list)
 
-wave_obj = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/SFX_schaak.wav")
-wave_obj_2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/enpassant.wav")
+wave_obj = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.SFX_schaak.wav")
+wave_obj_2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.enpassant.wav")
 
 ##def variable for true bpm adjusted time 
 
