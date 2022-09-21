@@ -4,7 +4,7 @@ import random
 
 PlayBackLoop = True 
 
-noteDuration = [0.25, 0.5, 1, 2.25]
+QtnoteDuration = [0.25, 0.5, 0.75, 0.5]
 timeStamps16th = []
 bpmNoteTrue = []
 
@@ -17,13 +17,13 @@ bpm = 30
 bpm_adjust = 60/bpm
 
 def note_to_16():
-    for i in noteDuration: 
+    for i in QtnoteDuration: 
         timeStamps16th.append(i*4)
 
 
 
 def bpm_adjust_16(): 
-    for i in noteDuration: 
+    for i in QtnoteDuration: 
         bpmNoteTrue.append(i*bpm_adjust)
         
 def change_it_up():     
@@ -48,14 +48,27 @@ change_it_up()
 # timestamp = bpmNoteTrue.pop(0)
 # print(len(bpmNoteTrue))
 
-timestamp = bpmNoteTrue.pop(0)
+bpmNoteTrueTime = [] 
+
+currentTime = 0
+
+for i in bpmNoteTrue: 
+    timevalue = i + currentTime
+    bpmNoteTrueTime.append(timevalue)
+    currentTime = i + currentTime
+
+
+print(bpmNoteTrueTime)
+
+timestamp = bpmNoteTrueTime.pop(0)
 
 while PlayBackLoop: 
     timeNow = time.time()
     if(timeNow - startTime >= timestamp): 
         wave_obj.play()
-        if (len(bpmNoteTrue) > 0 ): 
-            timestamp = bpmNoteTrue.pop(0)
+        print("playing!")
+        if (len(bpmNoteTrueTime) > 0 ): 
+            timestamp = bpmNoteTrueTime.pop(0)
     
         else:
             PlayBackLoop = False  
