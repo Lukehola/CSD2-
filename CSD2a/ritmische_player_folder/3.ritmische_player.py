@@ -22,7 +22,7 @@ true_time_tobeadded = 0
 input_list = [4, 1, 0.5, 1.5, 0.5, 130]
 print(input_list)
 
-bpm = input_list[-1]
+bpm = float(input_list[-1])
 lines_amount = input_list[0]
 
 second_apart_list = input_list[1:-1] 
