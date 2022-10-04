@@ -7,6 +7,9 @@ PlayBackLoop = True
 QtnoteDuration = [0.25, 0.5, 0.75, 0.5]
 timeStamps16th = []
 bpmNoteTrue = []
+bpmNoteTrueTime = [] 
+storedlist = []
+loopamount = 0 
 
 startTime = time.time()
 
@@ -20,7 +23,7 @@ def note_to_16():
     for i in QtnoteDuration: 
         timeStamps16th.append(i*4)
 
-
+#Adjust time 
 
 def bpm_adjust_16(): 
     for i in QtnoteDuration: 
@@ -41,26 +44,26 @@ def change_it_up():
 
 bpm_adjust_16()
 note_to_16()
-change_it_up()
+#change_it_up()
 
-# print(bpmNoteTrue)
-# print(timeStamps16th)
-# timestamp = bpmNoteTrue.pop(0)
-# print(len(bpmNoteTrue))
-
-bpmNoteTrueTime = [] 
 
 currentTime = 0
 
-for i in bpmNoteTrue: 
-    timevalue = i + currentTime
-    bpmNoteTrueTime.append(timevalue)
-    currentTime = i + currentTime
+def bpm_note_true_fun(): 
+    for i in bpmNoteTrue: 
+        global timevalue 
+        global currentTime
+        timevalue = i + currentTime
+        bpmNoteTrueTime.append(timevalue)
+        currentTime = timevalue
 
+bpm_note_true_fun()
 
 print(bpmNoteTrueTime)
 
 timestamp = bpmNoteTrueTime.pop(0)
+
+## speelt de sample en popped de BPMNOTETRUETIME
 
 while PlayBackLoop: 
     timeNow = time.time()
@@ -70,8 +73,18 @@ while PlayBackLoop:
         if (len(bpmNoteTrueTime) > 0 ): 
             timestamp = bpmNoteTrueTime.pop(0)
     
+    ## hier moeten alle elementen opnieuw de lijst in 
+    ## zorg ervoor dat je de playbackloop kunt stoppen 
+
         else:
-            PlayBackLoop = False  
+            if loopamount == 5: 
+                PlayBackLoop = False
+            else:   
+                bpm_note_true_fun()
+                change_it_up()
+                loopamount = loopamount + 1 
+                print(bpmNoteTrueTime)
+
 
     else: 
         time.sleep(0.001)
