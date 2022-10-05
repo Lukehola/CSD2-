@@ -1,11 +1,11 @@
-from sqlite3 import Timestamp
+
 import time 
 import simpleaudio as sa 
 import random 
 
 samp1 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.SFX_schaak.wav")
-samp2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.SFX_schaak.wav")
-samp3 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.SFX_schaak.wav")
+samp2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.enpassant.wav")
+samp3 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/CHEF_snare_07_v2.wav")
 
 samp1_dict = {
     "Name" : "Samp 1", 
@@ -28,12 +28,12 @@ bpmNoteTrue = []
 bpmNoteTrueTime = [] 
 loopamount = 0 
 
-
-
 startTime = time.time()
 
-wave_obj = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.SFX_schaak.wav")
-wave_obj_2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.enpassant.wav")
+#------------------------------------------------------------------------------------------------------------------------
+# wave_obj = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.SFX_schaak.wav")
+# wave_obj_2 = sa.WaveObject.from_wave_file("/Users/521459/Desktop/CSD2-/CSD2a/ritmische_player_folder/3a.enpassant.wav")
+#------------------------------------------------------------------------------------------------------------------------
 
 bpm = 30
 bpm_adjust = 60/bpm
@@ -67,6 +67,9 @@ note_to_16()
 
 
 currentTime = 0
+
+#makes sure previous item is added to current, to make sure it increases. Basically, a distance of 0.5 seconds and
+#1.5 seconds becomes 2 in the bpmNoteTrueTime 
 
 def bpm_note_true_fun(): 
     for i in bpmNoteTrue: 
@@ -104,9 +107,16 @@ while PlayBackLoop:
     timeNow = time.time() - startTime
     for i in range(len(all_samp_events)): 
         if timeNow >= all_samp_events[i]["Timestamp"]: 
-            all_samp_events[i].play
+            all_samp_events[i]["Sample"].play()
             time.sleep(0.1)
-            all_samp_events[i].play
+            all_samp_events[i]["Sample"].play()
+
+
+        # if timeNow >= all_samp_events[-1]["Timestamp"]: 
+        #     PlayBackLoop == False 
+        #     startTime = time.time()
+        #     time.sleep(0.1)
+        #     PlayBackLoop == True 
 
 
 
