@@ -8,8 +8,9 @@ QtnoteDuration = [0.25, 0.5, 0.75, 0.5]
 timeStamps16th = []
 bpmNoteTrue = []
 bpmNoteTrueTime = [] 
-storedlist = []
 loopamount = 0 
+
+
 
 startTime = time.time()
 
