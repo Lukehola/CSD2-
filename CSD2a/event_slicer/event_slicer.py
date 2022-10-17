@@ -1,5 +1,6 @@
 
-import time 
+import time
+from tracemalloc import start 
 import simpleaudio as sa 
 import random 
 
@@ -22,7 +23,7 @@ samp3_dict = {
 
 PlayBackLoop = True 
 
-QtnoteDuration = [0.25, 0.5, 0.75, 0.5]
+QtnoteDuration = [0.25, 0.5, 0.5, 0.5]
 timeStamps16th = []
 bpmNoteTrue = []
 bpmNoteTrueTime = [] 
@@ -97,19 +98,26 @@ samp2_events = create_dictio(samp2_dict["Instrument"],bpmNoteTrueTime,samp2_dict
 samp3_events = create_dictio(samp3_dict["Instrument"],bpmNoteTrueTime,samp3_dict["Name"])
 
 
-
+def sortByTimestamp(event):
+    return event["Timestamp"]
+    
 all_samp_events = samp1_events + samp2_events + samp3_events
-all_samp_events = sorted(all_samp_events, key=lambda x: x['Timestamp']) 
+all_samp_events.sort(key = sortByTimestamp)
 
 print(all_samp_events)
 
+playValueEvent = 0 
+
 while PlayBackLoop: 
     timeNow = time.time() - startTime
-    for i in range(len(all_samp_events)): 
-        if timeNow >= all_samp_events[i]["Timestamp"]: 
-            all_samp_events[i]["Sample"].play()
-            time.sleep(0.1)
-            all_samp_events[i]["Sample"].play()
+    if playValueEvent < len(all_samp_events) - 1:
+        if timeNow >= all_samp_events[playValueEvent]["Timestamp"]: 
+            all_samp_events[playValueEvent]["Sample"].play()
+            playValueEvent = playValueEvent + 1 
+    else: 
+        time.sleep(0.001)
+
+
 
 
         # if timeNow >= all_samp_events[-1]["Timestamp"]: 
